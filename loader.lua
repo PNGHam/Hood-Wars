@@ -58,7 +58,6 @@ local LoadBtn = HomeTab:CreateButton({
    Name = "Load Selected Theme",
    Callback = function()
     	local currentOption = themeDropdown.CurrentOption[1]
-    	print('Loading theme: "' .. currentOption .. '"')
     	wait(0.1)
 		getgenv().theme = currentOption
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/PNGHam/Hood-Wars/refs/heads/main/main.lua"))()
