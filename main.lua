@@ -45,6 +45,7 @@ local VisualsTab = Window:CreateTab("Visuals", "eye") -- Title, Image
 local MovementTab = Window:CreateTab("Movement", "gauge") -- Title, Image
 
 local VersionSection = HomeTab:CreateSection("Information")
+local themeLabel = HomeTab:CreateLabel("Current Theme: " .. theme, nil, Color3.fromRGB(255, 255, 255), false)
 local VersionLabel = HomeTab:CreateLabel("Version: " .. version, nil, Color3.fromRGB(255, 255, 255), false)
 local versionDivider = HomeTab:CreateDivider()
 local unloadBtn = HomeTab:CreateButton({
