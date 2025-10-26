@@ -1,6 +1,25 @@
+local function LoadScript()
 local theme = getgenv().theme
 local version = "1.0"
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local gunMods = {
+	["Cooldown"] = 0.1,
+	["Damage"] = 9,
+	["ExtraDamage"] = 0,
+	["MaxUses"] = 30,
+	["OriginBrightness"] = 10,
+	["RealAmmo"] = 30,
+	["Uses"] = 30,
+	["ReloadLength"] = 2.5,
+	["AimZoom"] = 50,
+	["MaxRange"] = 200,
+	["AimSensitivity"] = 1,
+	["SpeedModifier"] = 0,
+	["DrawLength"] = 10,
+	["Recoil"] = 1.1,
+	["AimSpeed"] = 100
+}
+
 
 local Window = Rayfield:CreateWindow({
    Name = "Hood Wars SCRIPT",
@@ -57,21 +76,67 @@ local unloadBtn = HomeTab:CreateButton({
 
 local ModsSection = CombatTab:CreateSection("Gun Mods")
 
-local GunCooldown = CombatTab:CreateInput({
-   Name = "FireRate",
-   CurrentValue = "",
-   PlaceholderText = "default ( 0 )",
-   RemoveTextAfterFocusLost = false,
-   Flag = "Input1",
-   Callback = function(Text)
-		print("applying mod : " .. Text)
+local FireSpeedSlider = CombatTab:CreateSlider({
+   Name = "Fire Rate",
+   Range = {0, 20},
+   Increment = 0.1,
+   Suffix = "",
+   CurrentValue = 1,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+		gunMods.Cooldown = Value
    end,
 })
+
+local ReloadSlider = CombatTab:CreateSlider({
+   Name = "Reload Speed",
+   Range = {0, 20},
+   Increment = 0.1,
+   Suffix = "",
+   CurrentValue = 2.5,
+   Flag = "Slider2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+		gunMods.ReloadLength = Value
+   end,
+})
+
+local AimZoom = CombatTab:CreateSlider({
+   Name = "Spread",
+   Range = {0, 100},
+   Increment = 1,
+   Suffix = "",
+   CurrentValue = 40,
+   Flag = "Slider4", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+		gunMods.AimZoom = Value
+   end,
+})
+
+local RecoilSlider = CombatTab:CreateSlider({
+   Name = "Gun Recoil",
+   Range = {0, 20},
+   Increment = 0.1,
+   Suffix = "",
+   CurrentValue = 1.1,
+   Flag = "Slider3", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+	gunMods.Recoil = Value
+   end,
+})
+
 
 local ChangeGunStats = CombatTab:CreateButton({
    Name = "Apply Mods",
    Callback = function()
-   -- The function that takes place when the button is pressed
+      for k, v in pairs(gunMods) do
+         print(k .. " is " .. tostring(v))
+      end
    end,
 })
+end
 
+if getgenv().theme then
+	LoadScript()
+else
+	print("INVALID!")
+end
