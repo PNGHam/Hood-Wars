@@ -163,7 +163,7 @@ local function LoadScript()
 end
 
 --// Loader
-if getgenv().theme then
+if getgenv().theme == "Default" or getgenv().theme == "AmberGlow" or getgenv().theme == "Amethyst" or getgenv().theme == "Bloom" or getgenv().theme == "DarkBlue" or getgenv().theme == "Green" or getgenv().theme == "Light" or getgenv().theme == "Ocean" or getgenv().theme == "Serenity"then
 	LoadScript()
 else
 	warn("ATTEMPTING TO EXECUTE SCRIPT WITH INVALID THEME!")
